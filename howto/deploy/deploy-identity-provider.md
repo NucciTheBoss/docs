@@ -11,12 +11,113 @@ An identity provider must be deployed and integrated with Charmed HPC to supply 
 user and group information. This guide provides you with different options for how to set up an
 identity provider for your Charmed HPC cluster.
 
+Follow the instructions in the {ref}`identity-authentik-with-sssd` section if you want to deploy
+a new identity provider as part of deploying a new Charmed HPC cluster.
+
 Follow the instructions in the {ref}`identity-external-ldap-server-with-sssd`
 section if you have an existing, external LDAP server that you want to use with your
 Charmed HPC cluster.
 
-Follow the instructions in the {ref}`identity-glauth-with-sssd` section if you are
-experimenting with Charmed HPC or are deploying a small Charmed HPC cluster.
+(identity-authentik-with-sssd)=
+## Authentik with SSSD
+
+This section shows you how to use Authentik, an open source platform for unified user management,
+as your Charmed HPC cluster's identity provider, and SSSD as the client for integrating your cluster's login
+and compute nodes to Authentik's LDAP outpost.
+
+:::{admonition} Unfamiliar with Authentik?
+:class: note
+
+If you're unfamiliar with operating Authentik, see the [Charmed Authentik tutorial](https://canonical-identity.readthedocs-hosted.com/authentik/tutorial/getting-started/)
+guide for a high-level introduction to Authentik.
+:::
+
+### Prerequisites
+
+- An active [Slurm deployment](#howto-deploy-deploy-slurm) in your [`charmed-hpc` machine cloud](#howto-initialize-machine-cloud).
+- An initialized [`charmed-hpc-k8s` Kubernetes cloud](#howto-initialize-kubernetes-cloud).
+- The [Juju CLI client](https://canonical.com/juju/docs/juju-cli/3.6/reference/juju-cli/) installed on your machine.
+
+### Deploy Authentik and SSSD
+
+You have two options for deploying Authentik and SSSD:
+
+1. Using the [Juju CLI client](https://canonical.com/juju/docs/juju-cli/3.6/reference/juju-cli/).
+2. Using the [Juju Terraform client](https://canonical.com/juju/docs/terraform-provider-juju/2.3/).
+
+If you want to use Terraform to deploy Authentik and SSSD, see the
+[Manage `terraform-provider-juju`](https://canonical.com/juju/docs/terraform-provider-juju/2.3/howto/manage-the-terraform-provider-for-juju/) how-to guide for additional
+requirements.
+
+#### Deploy Authentik
+
+:::::{tab-set}
+
+::::{tab-item} CLI
+:sync: cli
+
+<!-- CLI instructions for deploying Authentik. -->
+
+::::
+
+::::{tab-item} Terraform
+:sync: terraform
+
+<!-- Terraform instructions for deploying Authentik. -->
+
+::::
+
+:::::
+
+Your Authentik deployment will become active within a few minutes. The output
+of `juju status`{l=shell} will be similar to the following:
+
+:::{terminal}
+:scroll:
+
+juju status
+
+"Authentik deployment"
+:::
+
+You now need to deploy SSSD in your slurm model to enroll your cluster’s machines with the Authentik LDAP outpost.
+
+#### Deploy SSSD
+
+:::{include} /reuse/howto/setup/deploy-identity-provider/common/deploy-sssd.txt
+:::
+
+You now need to integrate SSSD with the Authentik application in your `identity` model so that
+the SSSD application can activate and enroll your machines with the Authentik LDAP outpost.
+
+#### Integrate SSSD with Authentik
+
+:::::{tab-set}
+
+::::{tab-item} CLI
+:sync: cli
+
+<!-- CLI instructions for integrating Authentik with SSSD -->
+
+::::
+
+::::{tab-item} Terraform
+:sync: terraform
+
+<!-- Terraform instructions for integrating Authentik with SSSD -->
+
+::::
+
+:::::
+
+### Next Steps
+
+You can now use Authentik as the identity provider for your Charmed HPC cluster.
+
+<!-- Link to how-to documentation for managing users and groups in Authentik with Terraform -->
+
+You can also start exploring the [Integrate](howto-integrate) section if you have
+completed the {ref}`howto-deploy-deploy-shared-filesystem` how-to.
 
 (identity-external-ldap-server-with-sssd)=
 ## External LDAP server with SSSD
@@ -493,310 +594,6 @@ SSSD will reactivate within a few minutes. You will see that the offer
 ### Next Steps
 
 You can now use your external LDAP server as the identity provider for your Charmed HPC cluster.
-
-You can also start exploring the [Integrate](howto-integrate) section if you have
-completed the {ref}`howto-deploy-deploy-shared-filesystem` how-to.
-
-(identity-glauth-with-sssd)=
-## GLAuth with SSSD
-
-This section shows you how to use GLAuth, a lightweight LDAP server, as your Charmed HPC
-cluster's identity provider, and SSSD as the client for integrating your cluster's login
-and compute nodes to the GLAuth server.
-
-:::{admonition} Unfamiliar with GLAuth?
-:class: note
-
-If you're unfamiliar with operating GLAuth, see the [GLAuth quick start](https://glauth.github.io/docs/quickstart.html)
-guide for a high-level introduction to GLAuth.
-:::
-
-:::{admonition} Using GLAuth in a production Charmed HPC cluster
-:class: warning
-
-GLAuth is a lightweight LDAP server that is intended to be used for development
-or home use. You should only use GLAuth as the identity provider for your cluster
-if you are experimenting with Charmed HPC or deploying a small cluster.
-
-You should deploy a dedicated LDAP server and follow the instructions in the
-{ref}`identity-external-ldap-server-with-sssd` section instead if you are
-looking to deploy a production-grade Charmed HPC cluster instead.
-:::
-
-### Prerequisites
-
-- An active [Slurm deployment](#howto-deploy-deploy-slurm) in your [`charmed-hpc` machine cloud](#howto-initialize-machine-cloud).
-- An initialized [`charmed-hpc-k8s` Kubernetes cloud](#howto-initialize-kubernetes-cloud).
-- The [Juju CLI client](https://documentation.ubuntu.com/juju/latest/user/howto/manage-juju/) installed on your machine.
-
-### Deploy GLAuth and SSSD
-
-You have two options for deploying GLAuth and SSSD:
-
-1. Using the [Juju CLI client](https://documentation.ubuntu.com/juju/latest/user/reference/juju-cli/).
-2. Using the [Juju Terraform client](https://canonical-terraform-provider-juju.readthedocs-hosted.com/latest/).
-
-If you want to use Terraform to deploy GLAuth and SSSD, see the
-[Manage `terraform-provider-juju`](https://canonical-terraform-provider-juju.readthedocs-hosted.com/latest/howto/manage-the-terraform-provider-for-juju/) how-to guide for additional
-requirements.
-
-#### Deploy GLAuth
-
-:::::{tab-set}
-
-::::{tab-item} CLI
-:sync: cli
-
-First, use `juju add-model`{l=shell} to create the `identity` model in your
-`charmed-hpc-k8s` Kubernetes cloud:
-
-:::{code-block} shell
-juju add-model identity charmed-hpc-k8s
-:::
-
-Now use `juju deploy`{l=shell} to deploy GLAuth with:
-
-- Postgres as GLAuth's back-end database.
-- Traefik as GLAuth's ingress provider.
-- self-signed-certificates as GLAuth's X.509 certificates provider.
-
-:::{code-block} shell
-juju deploy glauth-k8s --channel "edge" \
-  --config anonymousdse_enabled=true \
-  --trust
-juju deploy postgresql-k8s --channel "14/stable" --trust
-juju deploy self-signed-certificates
-juju deploy traefik-k8s --trust
-:::
-
-:::{include} /reuse/howto/setup/deploy-identity-provider/glauth/anonymous-dse-note.txt
-:::
-
-Next, use `juju integrate` to integrate GLAuth with Postgres, Traefik, and
-self-signed-certificates:
-
-:::{code-block} shell
-juju integrate glauth-k8s postgresql-k8s
-juju integrate glauth-k8s self-signed-certificates
-juju integrate glauth-k8s:ingress traefik-k8s
-:::
-
-::::
-
-::::{tab-item} Terraform
-:sync: terraform
-
-First, create the Terraform configuration file _{{ glauth_tf_file }}_
-using `mkdir`{l=shell} and `touch`{l=shell}:
-
-:::{code-block} shell
-mkdir glauth
-touch glauth/main.tf
-:::
-
-Now open _{{ glauth_tf_file }}_ in a text editor and add the Juju Terraform provider
-to your configuration:
-
-:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/glauth/glauth.tf
-:caption: {{ glauth_tf_file }}
-:language: terraform
-:lines: 1-8
-:::
-
-Next, create the `identity` model on your `charmed-hpc-k8s` Kubernetes cloud:
-
-:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/glauth/glauth.tf
-:caption: {{ glauth_tf_file }}
-:language: terraform
-:lines: 10-16
-:::
-
-Now deploy GLAuth with:
-
-- Postgres as GLAuth's back-end database.
-- Traefik as GLAuth's Kubernetes ingress provider.
-- self-signed-certificates as GLAuth's X.509 certificates provider.
-
-:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/glauth/glauth.tf
-:caption: {{ glauth_tf_file }}
-:language: terraform
-:lines: 18-43
-:::
-
-:::{include} /reuse/howto/setup/deploy-identity-provider/glauth/anonymous-dse-note.txt
-:::
-
-Next, integrate GLAuth with Postgres, Traefik, and self-signed-certificates:
-
-:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/glauth/glauth.tf
-:caption: {{ glauth_tf_file }}
-:language: terraform
-:lines: 45-80
-:::
-
-You can expand the dropdown below to see the full _{{ glauth_tf_file }}_
-Terraform configuration file before applying it. Now use the `terraform`{l=shell}
-command to apply your configuration:
-
-:::{code-block} shell
-terraform -chdir=glauth init
-terraform -chdir=glauth apply -auto-approve
-:::
-
-:::{dropdown} Full _{{ glauth_tf_file }}_ Terraform configuration file
-:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/glauth/glauth.tf
-:caption: {{ glauth_tf_file }}
-:language: terraform
-:linenos:
-:::
-:::
-
-::::
-
-:::::
-
-Your GLAuth deployment will become active within a few minutes. The output
-of `juju status`{l=shell} will be similar to the following:
-
-:::{terminal}
-:scroll:
-
-juju status
-
-Model     Controller              Cloud/Region             Version  SLA          Timestamp
-identity  charmed-hpc-controller  charmed-hpc-k8s/default  3.6.4    unsupported  14:24:50-04:00
-
-App                       Version  Status  Scale  Charm                     Channel        Rev  Address         Exposed  Message
-glauth-k8s                         active      1  glauth-k8s                latest/edge     52  10.152.183.159  no
-postgresql-k8s            14.15    active      1  postgresql-k8s            14/stable      495  10.152.183.236  no
-self-signed-certificates           active      1  self-signed-certificates  latest/stable  264  10.152.183.57   no
-traefik-k8s               2.11.0   active      1  traefik-k8s               latest/stable  232  10.152.183.122  no       Serving at 10.175.90.230
-
-Unit                         Workload  Agent  Address     Ports  Message
-glauth-k8s/0*                active    idle   10.1.0.165
-postgresql-k8s/0*            active    idle   10.1.0.45          Primary
-self-signed-certificates/0*  active    idle   10.1.0.128
-traefik-k8s/0*               active    idle   10.1.0.73          Serving at 10.175.90.230
-:::
-
-You now need to deploy SSSD in your slurm model to enroll your cluster’s machines with the GLAuth server.
-
-#### Deploy SSSD
-
-:::{include} /reuse/howto/setup/deploy-identity-provider/common/deploy-sssd.txt
-:::
-
-You now need to integrate SSSD with the GLAuth application in your `identity` model so that
-the SSSD application can activate and enroll your machines with the GLAuth server.
-
-#### Integrate SSSD with GLAuth
-
-:::::{tab-set}
-
-::::{tab-item} CLI
-:sync: cli
-
-First, create offers for GLAuth in your `identity` model using `juju offer`{l=shell}:
-
-:::{code-block} shell
-juju offer identity.glauth-k8s:ldap ldap
-juju offer identity.glauth-k8s:send-ca-cert send-ldap-certs
-:::
-
-Next, use `juju consume`{l=shell} to consume offers from your GLAuth application
-in your `slurm` model:
-
-:::{code-block} shell
-juju consume identity.ldap
-juju consume identity.send-ldap-certs
-:::
-
-After that, use `juju integrate`{l=shell} to integrate SSSD with GLAuth:
-
-:::{code-block} shell
-juju integrate sssd ldap
-juju integrate sssd send-ldap-certs
-:::
-
-:::{include} /reuse/howto/setup/deploy-identity-provider/common/sssd-with-ldap-tls-status.txt
-:::
-
-::::
-
-::::{tab-item} Terraform
-:sync: terraform
-
-First, create the Terraform configuration file _{{ integrate_sssd_with_glauth_tf_file }}_
-using `mkdir`{l=shell} and `touch`{l=shell}:
-
-:::{code-block} shell
-mkdir integrate-sssd-with-glauth
-touch integrate-sssd-with-glauth/main.tf
-:::
-
-Now open _{{ integrate_sssd_with_glauth_tf_file }}_ in a text editor and add the Juju Terraform provider
-to your configuration:
-
-:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/glauth/integrate-sssd-with-glauth.tf
-:caption: {{ integrate_sssd_with_glauth_tf_file }}
-:language: terraform
-:lines: 1-8
-:::
-
-Next, declare data sources for the `identity` and `slurm` models, and the GLAuth and SSSD
-applications:
-
-:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/glauth/integrate-sssd-with-glauth.tf
-:caption: {{ integrate_sssd_with_glauth_tf_file }}
-:language: terraform
-:lines: 10-28
-:::
-
-Now create offers from the GLAuth application in your `identity` model:
-
-:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/glauth/integrate-sssd-with-glauth.tf
-:caption: {{ integrate_sssd_with_glauth_tf_file }}
-:language: terraform
-:lines: 30-42
-:::
-
-After that, integrate SSSD with GLAuth:
-
-:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/glauth/integrate-sssd-with-glauth.tf
-:caption: {{ integrate_sssd_with_glauth_tf_file }}
-:language: terraform
-:lines: 44-66
-:::
-
-You can expand the dropdown below to see the full _{{ integrate_sssd_with_glauth_tf_file }}_
-Terraform configuration file before applying it. Now use the `terraform`{l=shell} command to
-apply your configuration:
-
-:::{code-block} shell
-terraform -chdir=integrate-sssd-with-glauth init
-terraform -chdir=integrate-sssd-with-glauth apply -auto-approve
-:::
-
-:::{dropdown} Full _{{ integrate_sssd_with_glauth_tf_file }}_ Terraform configuration file
-:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/glauth/integrate-sssd-with-glauth.tf
-:caption: {{ integrate_sssd_with_glauth_tf_file }}
-:language: terraform
-:::
-:::
-
-:::{include} /reuse/howto/setup/deploy-identity-provider/common/sssd-with-ldap-tls-status.txt
-:::
-
-::::
-
-:::::
-
-### Next Steps
-
-You can now use GLAuth as the identity provider for your Charmed HPC cluster.
-
-Explore [GLAuth's Database documentation](https://glauth.github.io/docs/databases.html) for more information
-on how to use SQL queries to manage your cluster's users and groups in your Postgres database.
 
 You can also start exploring the [Integrate](howto-integrate) section if you have
 completed the {ref}`howto-deploy-deploy-shared-filesystem` how-to.
