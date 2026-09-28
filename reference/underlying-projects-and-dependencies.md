@@ -153,7 +153,7 @@ slurmdbd, [Implementation](https://github.com/canonical/slurm-charms/blob/main/i
 slurmrestd, [Implementation](https://github.com/canonical/slurm-charms/blob/main/internal/slurmrestd-interface/README.md)
 slurm-oci-runtime, [Implementation](https://github.com/canonical/slurm-charms/blob/main/pkg/slurm-oci-runtime-interface/README.md)
 cos_agent, [Implementation](https://charmhub.io/grafana-agent/libraries/cos_agent)
-ldap, [Implementation](https://charmhub.io/glauth-k8s/libraries/ldap)
+ldap, [Implementation](https://github.com/canonical/charmlibs/blob/main/interfaces/ldap/README.md)
 mysql_client, [Implementation](https://charmhub.io/data-platform-libs/libraries/data_interfaces)
 filesystem_info, [Implementation](https://charmhub.io/filesystem-client/libraries/filesystem_info)
 mount_info, [Implementation](https://charmhub.io/filesystem-client/libraries/mount_info)
