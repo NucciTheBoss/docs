@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Discover the projects, charms, and integrations that make up Charmed HPC, including core projects, dependencies, and optional components with source and bug tracker links.
+---
+
 (reference-underlying-projects-and-dependencies)=
 # Underlying projects and dependencies
 
