@@ -95,13 +95,9 @@ Charmed HPC is a platform for managing high-performance computing clusters. It a
 :::
 ::::
 
-### Reference and community
+### Community
 
 ::::{domain}
-:::{slice} Reference
-{doc}`Glossary <reference/glossary>`
-:::
-
 :::{slice} Contribute
 {doc}`Contributing to documentation <contributing/documentation>`
 {doc}`Contributing to code <contributing/code>`

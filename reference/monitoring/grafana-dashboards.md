@@ -9,8 +9,8 @@ myst:
 # Grafana dashboards
 
 This is an overview of all the charms used in Charmed HPC that provide dashboards for
-{term}`Grafana`, which acts as a web interface to visualize data from aggregators such
-as {term}`Prometheus` or {term}`Loki`.
+Grafana, which acts as a web interface to visualize data from aggregators such
+as Prometheus or Loki.
 
 See {ref}`howto-manage-integrate-with-cos` for more information.
 
@@ -23,7 +23,7 @@ to see the exact query used to provide the panel with data.
 
 ## Slurmctld
 
-The dashboards from the {term}`slurmctld` charm provide a display of information from the
+The dashboards from the `slurmctld` charm provide a display of information from the
 entire cluster, each partition, and each charm.
 
 ### Cluster Overview

@@ -416,6 +416,12 @@ Now that Slurm is deployed, you can deploy the shared filesystem of your Charmed
 
 - {ref}`howto-deploy-deploy-shared-filesystem`
 
-You can also explore the {ref}`reference-glossary` for further information on {term}`sackd`,
-{term}`slurmctld`, {term}`slurmd`, {term}`slurmdbd`, {term}`slurmrestd`, and {term}`MySQL`
-and how they are managed by their respective charms.
+For more information on the charms deployed in this guide and how they are managed, see their
+Charmhub pages: 
+
+- [`sackd`](https://charmhub.io/sackd)
+- [`slurmctld`](https://charmhub.io/slurmctld)
+- [`slurmd`](https://charmhub.io/slurmd)
+- [`slurmdbd`](https://charmhub.io/slurmdbd)
+- [`slurmrestd`](https://charmhub.io/slurmrestd)
+- [`mysql`](https://charmhub.io/mysql)

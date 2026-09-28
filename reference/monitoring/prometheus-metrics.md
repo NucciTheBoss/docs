@@ -7,9 +7,9 @@ myst:
 # Prometheus metrics
 
 This is an overview of all the charms used in Charmed HPC that provide monitoring metrics
-for {term}`Prometheus`, a metrics aggregator and alerts manager for applications.
+for Prometheus, a metrics aggregator and alerts manager for applications.
 
-All metrics and alerts can be viewed from Prometheus or from the {term}`Grafana` web interface.
+All metrics and alerts can be viewed from Prometheus or from the Grafana web interface.
 See {ref}`howto-manage-integrate-with-cos` for more information.
 
 The following table lists all the charms on Charmed HPC that expose metrics and alerts to Prometheus

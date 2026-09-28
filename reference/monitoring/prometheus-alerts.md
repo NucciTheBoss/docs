@@ -8,7 +8,7 @@ myst:
 
 This page lists the Prometheus alert rules provided by Charmed HPC charms. These alerts
 fire when specific conditions are met in your cluster and can be viewed in the Prometheus
-or {term}`Grafana` web interface.
+or Grafana web interface.
 
 See {ref}`howto-manage-integrate-with-cos` for instructions on integrating with COS.
 

@@ -37,11 +37,6 @@ Reference data for evaluating and tuning the performance of a Charmed HPC cluste
 
 - {ref}`Benchmark results on Microsoft Azure <reference-performance>`
 
-## Terminology
-
-- {ref}`reference-glossary`
-
-
 ```{filtered-toctree}
 :titlesonly:
 :maxdepth: 1
@@ -53,6 +48,5 @@ interconnects
 monitoring/index
 Performance <performance>
 hardening
-glossary
 
 ```

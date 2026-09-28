@@ -121,6 +121,8 @@ juju deploy nfs-server-proxy \
 
 ::::::{tab-item} CephFS
 
+CephFS is a POSIX-compliant file system interface that runs on top of a Ceph storage cluster.
+
 To integrate with an external CephFS share, you will require:
  - The unique identifier of the cluster (commonly known as fsid).
  - The name of the filesystem within the Ceph cluster.
@@ -129,7 +131,8 @@ To integrate with an external CephFS share, you will require:
  - The username with permissions to access the filesystem.
  - The cephx key for the username.
 
-Here, a Ceph cluster will be set up using [MicroCeph][ceph].
+Here, a Ceph cluster will be set up using [MicroCeph][ceph], a tool that simplifies deployment
+and management of Ceph storage both standalone and in a charmed environment using Juju.
 
 [ceph]: https://canonical.com/ceph/docs
 

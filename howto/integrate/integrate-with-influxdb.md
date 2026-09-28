@@ -8,7 +8,8 @@ myst:
 (howto-manage-integrate-with-influxdb)=
 # Integrate with InfluxDB
 
-Charmed HPC can integrate with InfluxDB to enable job profiling in Slurm.
+Charmed HPC can integrate with InfluxDB, an open source, distributed, time series database,
+to enable job profiling in Slurm.
 
 This guide explains how to enable job profiling by deploying and integrating InfluxDB with Charmed HPC.
 
