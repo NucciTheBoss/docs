@@ -51,7 +51,6 @@ authentik-ldap-outpost, [Source](https://github.com/canonical/authentik-ldap-out
 mysql, [Source](https://github.com/canonical/mysql-operators), [Issue tracker](https://github.com/canonical/mysql-operators/issues)
 mysql-router, [Source](https://github.com/canonical/mysql-router-operator), [Issue tracker](https://github.com/canonical/mysql-router-operator/issues)
 traefik-k8s, [Source](https://github.com/canonical/traefik-k8s-operator), [Issue tracker](https://github.com/canonical/traefik-k8s-operator/issues)
-glauth-k8s, [Source](https://github.com/canonical/glauth-k8s-operator), [Issue tracker](https://github.com/canonical/glauth-k8s-operator/issues)
 postgresql-k8s, [Source](https://github.com/canonical/postgresql-k8s-operator), [Issue tracker](https://github.com/canonical/postgresql-k8s-operator/issues)
 :::
 
