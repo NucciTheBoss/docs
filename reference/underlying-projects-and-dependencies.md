@@ -45,6 +45,9 @@ are not maintained directly as part of Charmed HPC.
 :widths: 15, 10, 10
 
 juju, [Source](https://github.com/juju/juju), [Issue tracker](https://github.com/juju/juju/issues)
+authentik-server, [Source](https://github.com/canonical/authentik-server-operator), [Issue tracker](https://github.com/canonical/authentik-server-operator/issues)
+authentik-worker, [Source](https://github.com/canonical/authentik-worker-operator), [Issue tracker](https://github.com/canonical/authentik-worker-operator/issues)
+authentik-ldap-outpost, [Source](https://github.com/canonical/authentik-ldap-outpost-operator), [Issue tracker](https://github.com/canonical/authentik-ldap-outpost-operator/issues)
 mysql, [Source](https://github.com/canonical/mysql-operators), [Issue tracker](https://github.com/canonical/mysql-operators/issues)
 mysql-router, [Source](https://github.com/canonical/mysql-router-operator), [Issue tracker](https://github.com/canonical/mysql-router-operator/issues)
 traefik-k8s, [Source](https://github.com/canonical/traefik-k8s-operator), [Issue tracker](https://github.com/canonical/traefik-k8s-operator/issues)
@@ -120,7 +123,9 @@ A charm does not have any modifiable configuration options or runnable actions i
 : charm, configuration options, actions
 :widths: 15, 10, 10
 
-[glauth-k8s](https://charmhub.io/glauth-k8s), [Options](https://charmhub.io/glauth-k8s/configurations)
+[authentik-server](https://charmhub.io/authentik-server), [Options](https://charmhub.io/authentik-server/configurations), [Actions](https://charmhub.io/authentik-server/actions)
+[authentik-worker](https://charmhub.io/authentik-worker), [Options](https://charmhub.io/authentik-worker/configurations)
+[authentik-ldap-outpost](https://charmhub.io/authentik-ldap-outpost), [Options](https://charmhub.io/authentik-ldap-outpost/configurations)
 [postgresql-k8s](https://charmhub.io/postgresql-k8s), [Options](https://charmhub.io/postgresql-k8s/configurations), [Actions](https://charmhub.io/postgresql-k8s/actions)
 [traefik-k8s](https://charmhub.io/traefik-k8s), [Options](https://charmhub.io/traefik-k8s/configurations), [Actions](https://charmhub.io/traefik-k8s/actions)
 [grafana-k8s](https://charmhub.io/grafana-k8s), [Options](https://charmhub.io/grafana-k8s/configurations), [Actions](https://charmhub.io/grafana-k8s/actions)
