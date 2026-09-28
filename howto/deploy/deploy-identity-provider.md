@@ -31,17 +31,17 @@ external LDAP server's configuration information to other charmed applications.
 ### Prerequisites
 
 - An active [Slurm deployment](#howto-deploy-deploy-slurm) in your [`charmed-hpc` machine cloud](#howto-initialize-machine-cloud).
-- The [Juju CLI client](https://documentation.ubuntu.com/juju/latest/user/howto/manage-juju/) installed on your machine.
+- The [Juju CLI client](https://canonical.com/juju/docs/juju-cli/3.6/reference/juju-cli/) installed on your machine.
 
 ### Deploy ldap-integrator and SSSD
 
 You have two options for deploying ldap-integrator and SSSD:
 
-1. Using the [Juju CLI client](https://documentation.ubuntu.com/juju/latest/user/reference/juju-cli/).
-2. Using the [Juju Terraform client](https://canonical-terraform-provider-juju.readthedocs-hosted.com/latest/).
+1. Using the [Juju CLI client](https://canonical.com/juju/docs/juju-cli/3.6/reference/juju-cli/).
+2. Using the [Juju Terraform client](https://canonical.com/juju/docs/terraform-provider-juju/2.3/).
 
 If you want to use Terraform to deploy ldap-integrator and SSSD, see the
-[Manage `terraform-provider-juju`](https://canonical-terraform-provider-juju.readthedocs-hosted.com/latest/howto/manage-the-terraform-provider-for-juju/) how-to guide for additional
+[Manage `terraform-provider-juju`](https://canonical.com/juju/docs/terraform-provider-juju/2.3/howto/manage-the-terraform-provider-for-juju/) how-to guide for additional
 requirements.
 
 #### Deploy ldap-integrator
