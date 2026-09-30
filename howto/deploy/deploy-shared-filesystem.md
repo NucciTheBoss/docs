@@ -134,9 +134,7 @@ To integrate with an external CephFS share, you will require:
 Here, a Ceph cluster will be set up using [MicroCeph][ceph], a tool that simplifies deployment
 and management of Ceph storage both standalone and in a charmed environment using Juju.
 
-[ceph]: https://canonical.com/ceph/docs
-
-First, launch a virtual machine using [LXD](https://ubuntu.com/lxd):
+First, launch a virtual machine using [LXD](https://canonical.com/lxd):
 
 :::{code-block} shell
 snap install lxd
