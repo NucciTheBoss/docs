@@ -2,7 +2,7 @@
 # Monitoring
 
 Integrating COS with Charmed HPC enables you to monitor your Charmed HPC clusters resources
-with {term}`Prometheus`, {term}`Grafana`, and {term}`Loki`. The reference material in
+with Prometheus, Grafana, and Loki. The reference material in
 this section list the dashboards and metrics from Charmed HPC that you can interact with.
 
 - {ref}`Grafana: Dashboards and resource visualizations <reference-monitoring-grafana-dashboards>`

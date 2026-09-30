@@ -8,7 +8,7 @@ myst:
 (howto-manage-single-slurmctld-to-high-availability)=
 # Migrate Slurm controller to high availability
 
-To migrate a previously deployed single {term}`slurmctld` unit to a [high availability (HA)](explanation-high-availability) setup, a low-latency shared file system must be integrated to enable sharing of controller data across all `slurmctld` units. For guidance on choosing and deploying a shared file system, see the following sections:
+To migrate a previously deployed single `slurmctld` unit to a [high availability (HA)](explanation-high-availability) setup, a low-latency shared file system must be integrated to enable sharing of controller data across all `slurmctld` units. For guidance on choosing and deploying a shared file system, see the following sections:
 
 * [How to deploy a shared filesystem](howto-deploy-deploy-shared-filesystem)
 * [Shared `StateSaveLocation` using `filesystem-client` charm](explanation-slurmctld-high-availability-state-save-location)

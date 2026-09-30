@@ -23,7 +23,7 @@ cloud managed NFS server on the [`charmed-hpc-terraform`][hpc-tf] repository, wi
 ## Deploy an external filesystem server
 
 External servers that provide a shared filesystem cannot be integrated directly. Instead,
-we can use a [proxy charm](https://documentation.ubuntu.com/juju/latest/reference/charm/#proxy-charm) in order to expose
+we can use a [proxy charm](https://canonical.com/juju/docs/juju-cli/latest/reference/charm/#proxy-charm) in order to expose
 the required information to applications managed by Juju.
 
 :::::::{tab-set}
@@ -121,6 +121,8 @@ juju deploy nfs-server-proxy \
 
 ::::::{tab-item} CephFS
 
+CephFS is a POSIX-compliant file system interface that runs on top of a Ceph storage cluster.
+
 To integrate with an external CephFS share, you will require:
  - The unique identifier of the cluster (commonly known as fsid).
  - The name of the filesystem within the Ceph cluster.
@@ -129,11 +131,11 @@ To integrate with an external CephFS share, you will require:
  - The username with permissions to access the filesystem.
  - The cephx key for the username.
 
-Here, a Ceph cluster will be set up using [MicroCeph][ceph].
+Here, a Ceph cluster will be set up using [MicroCeph](https://canonical.com/ceph/docs/stable/), 
+a tool that simplifies deployment and management of Ceph storage, 
+in both standalone and charmed environments, using Juju.
 
-[ceph]: https://canonical.com/ceph/docs
-
-First, launch a virtual machine using [LXD](https://ubuntu.com/lxd):
+First, launch a virtual machine using [LXD](https://canonical.com/lxd):
 
 :::{code-block} shell
 snap install lxd
@@ -235,7 +237,7 @@ juju deploy filesystem-client \
 
 The `mountpoint` configuration represents the path that the filesystem will be mounted onto.
 
-`filesystem-client` is a [subordinate charm](https://documentation.ubuntu.com/juju/latest/reference/charm/#subordinate-charm)
+`filesystem-client` is a [subordinate charm](https://canonical.com/juju/docs/juju-cli/latest/reference/charm/#subordinate-charm)
 that can automatically mount any shared filesystems for the application related with it.
 In this case, we will relate it to the `sackd` and `slurmd` applications to have shared storage
 between all the login and compute nodes in the cluster:

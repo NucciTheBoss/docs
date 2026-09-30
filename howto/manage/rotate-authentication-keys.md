@@ -8,9 +8,9 @@ myst:
 (howto-manage-rotate-slurm-keys)=
 # Rotate authentication keys
 
-{term}`Slurm` uses two separate keys to secure cluster communication: an authentication key for
+Slurm uses two separate keys to secure cluster communication: an authentication key for
 Slurm remote procedure calls, and a JSON Web Token (JWT) key for REST API authentication. This
-guide provides instructions on how you can use the {term}`slurmctld` charm to rotate each of them.
+guide provides instructions on how you can use the `slurmctld` charm to rotate each of them.
 
 Both procedures are cluster-wide changes that require a maintenance window. For background on why
 and how often keys should be rotated, see {ref}`explanation-key-rotation`.

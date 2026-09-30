@@ -69,6 +69,9 @@ influxdb, [Source](https://code.launchpad.net/influxdb-charm), [Issue tracker](h
 (reference-charms)=
 ## Charms
 
+A charm is Python software for automating the lifecycle of applications, managed with Juju.
+Charms are also known as charmed operators.
+
 Charmed HPC is composed of both Machine and Kubernetes charms.
 
 Several of the charms include configuration options that are useful for customizing Charmed HPC deployments. These
@@ -124,6 +127,8 @@ A charm does not have any modifiable configuration options or runnable actions i
 ## Integrations
 
 Charmed HPC uses integrations to dictate how charmed applications communicate with each other.
+An integration is an exchange of data between two charms that allows for interoperability.
+Integrations were formerly known as relations.
 
 :::{csv-table}
 :header: >

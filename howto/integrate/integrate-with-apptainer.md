@@ -22,7 +22,7 @@ for a high-level introduction to administering Apptainer.
 
 ## Deploy Apptainer
 
-First, use `juju deploy`{l=shell} to deploy {term}`Apptainer` in the `slurm` model on
+First, use `juju deploy`{l=shell} to deploy Apptainer in the `slurm` model on
 your `charmed-hpc` machine cloud:
 
 :::{code-block} shell

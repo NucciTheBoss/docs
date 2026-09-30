@@ -24,3 +24,5 @@ howto/use/index/ howto/run-workloads/index/
 howto/use/use-apptainer/ howto/run-workloads/use-apptainer/
 
 howto/manage/manage-slurm/ howto/manage/manage-compute-nodes/
+
+reference/glossary/ reference/index/

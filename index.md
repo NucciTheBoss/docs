@@ -95,19 +95,6 @@ Charmed HPC is a platform for managing high-performance computing clusters. It a
 :::
 ::::
 
-### Reference and community
-
-::::{domain}
-:::{slice} Reference
-{doc}`Glossary <reference/glossary>`
-:::
-
-:::{slice} Contribute
-{doc}`Contributing to documentation <contributing/documentation>`
-{doc}`Contributing to code <contributing/code>`
-:::
-::::
-
 ## How this documentation is organized
 
 This documentation uses the [Diátaxis](https://diataxis.fr/) documentation structure.
@@ -129,7 +116,8 @@ Charmed HPC is an Ubuntu community project. It's an open source project that war
 
 * [Support](https://discourse.ubuntu.com/c/project/hpc/151)
 * [Online chat](https://matrix.to/#/#hpc:ubuntu.com)
-* [Contribute](contributing/index)
+* {ref}`Contribute to the documentation <contributing-to-docs>`
+* {ref}`Contribute to the project <contributing-to-code>`
 
 <!-- **Releases**
 

@@ -8,8 +8,8 @@ myst:
 (howto-manage-compute-nodes)=
 # Manage compute nodes and partitions
 
-{term}`Slurm` is the workload manager and job scheduling system of Charmed HPC. This guide
-provides instructions on how you can use the {term}`slurmd` and {term}`slurmctld` charms to
+Slurm is the workload manager and job scheduling system of Charmed HPC. This guide
+provides instructions on how you can use the `slurmd` and `slurmctld` charms to
 configure compute nodes, change their state, and adjust the size of your partitions.
 
 (howto-manage-custom-node-config)=
@@ -18,7 +18,7 @@ configure compute nodes, change their state, and adjust the size of your partiti
 :::{admonition} Do you need a custom node configuration?
 :class: note
 
-The {term}`slurmd` charm creates a default node configuration during deployment.
+The `slurmd` charm creates a default node configuration during deployment.
 
 This default configuration contains the hardware information of the node, and
 information on any GPUs that are attached to the underlying machine. You should only set
