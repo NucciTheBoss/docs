@@ -131,8 +131,9 @@ To integrate with an external CephFS share, you will require:
  - The username with permissions to access the filesystem.
  - The cephx key for the username.
 
-Here, a Ceph cluster will be set up using [MicroCeph][ceph], a tool that simplifies deployment
-and management of Ceph storage both standalone and in a charmed environment using Juju.
+Here, a Ceph cluster will be set up using [MicroCeph](https://canonical.com/ceph/docs/stable/), 
+a tool that simplifies deployment and management of Ceph storage, 
+in both standalone and in a charmed environments, using Juju.
 
 First, launch a virtual machine using [LXD](https://canonical.com/lxd):
 
