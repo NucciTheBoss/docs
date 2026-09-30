@@ -133,7 +133,7 @@ To integrate with an external CephFS share, you will require:
 
 Here, a Ceph cluster will be set up using [MicroCeph](https://canonical.com/ceph/docs/stable/), 
 a tool that simplifies deployment and management of Ceph storage, 
-in both standalone and in a charmed environments, using Juju.
+in both standalone and charmed environments, using Juju.
 
 First, launch a virtual machine using [LXD](https://canonical.com/lxd):
 
