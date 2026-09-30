@@ -23,7 +23,7 @@ cloud managed NFS server on the [`charmed-hpc-terraform`][hpc-tf] repository, wi
 ## Deploy an external filesystem server
 
 External servers that provide a shared filesystem cannot be integrated directly. Instead,
-we can use a [proxy charm](https://documentation.ubuntu.com/juju/latest/reference/charm/#proxy-charm) in order to expose
+we can use a [proxy charm](https://canonical.com/juju/docs/juju-cli/latest/reference/charm/#proxy-charm) in order to expose
 the required information to applications managed by Juju.
 
 :::::::{tab-set}
@@ -236,7 +236,7 @@ juju deploy filesystem-client \
 
 The `mountpoint` configuration represents the path that the filesystem will be mounted onto.
 
-`filesystem-client` is a [subordinate charm](https://documentation.ubuntu.com/juju/latest/reference/charm/#subordinate-charm)
+`filesystem-client` is a [subordinate charm](https://canonical.com/juju/docs/juju-cli/latest/reference/charm/#subordinate-charm)
 that can automatically mount any shared filesystems for the application related with it.
 In this case, we will relate it to the `sackd` and `slurmd` applications to have shared storage
 between all the login and compute nodes in the cluster:
