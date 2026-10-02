@@ -137,7 +137,7 @@ the external LDAP server's bind password is `"test"`:
 
 You can use Terraform's [built-in `file` function](https://developer.hashicorp.com/terraform/language/functions/file)
 to read in your bind password from a secure file rather provide
-it as plain text in the _{{ ldap_integrator_tf_file }}_ plan.
+it as plain text in the _{{ ldap_integrator_tf_file }}_ configuration file.
 :::
 
 Now deploy ldap-integrator. In this example, the external LDAP server's:
@@ -249,7 +249,7 @@ juju integrate ldap sssd
 ::::{tab-item} Terraform
 :sync: terraform
 
-First, create the Terraform plan _{{ integrate_sssd_with_ldap_integrator_tf_file }}_
+First, create the Terraform configuration file _{{ integrate_sssd_with_ldap_integrator_tf_file }}_
 using `mkdir`{l=shell} and `touch`{l=shell}:
 
 :::{code-block} shell
@@ -463,7 +463,7 @@ terraform -chdir=ldap-integrator apply -auto-approve
 :::
 
 You can expand the dropdown below to see the full _{{ manual_tls_certificates_tf_file }}_
-Terraform plan before applying it. Now use the `terraform`{l=shell} command again to
+Terraform configuration file before applying it. Now use the `terraform`{l=shell} command again to
 deploy and integrate manual-tls-certificates.
 
 :::{dropdown} Full _{{ manual_tls_certificates_tf_file }}_ Terraform configuration file
