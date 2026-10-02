@@ -11,19 +11,27 @@ An identity provider must be deployed and integrated with Charmed HPC to supply 
 user and group information. This guide provides you with different options for how to set up an
 identity provider for your Charmed HPC cluster.
 
-Follow the instructions in the {ref}`identity-authentik-with-sssd` section if you want to deploy
-a new identity provider as part of deploying a new Charmed HPC cluster.
+## Choosing an identity provider
 
-Follow the instructions in the {ref}`identity-external-ldap-server-with-sssd`
-section if you have an existing, external LDAP server that you want to use with your
-Charmed HPC cluster.
+:::{list-table}
+:header-rows: 1
+:widths: 50 50 
+
+* - Use case & requirements
+  - Recommended provider
+* - __Enterprise Identity__ : Your Charmed HPC cluster requires unified Single Sign-On (SSO), LDAP and SAML protocol bridging, Active Directory synchronization, and built-in administration console or first-party Terraform provider.
+  - {ref}`identity-authentik-with-sssd`
+* - __Existing Infrastructure__ : Your Charmed HPC cluster must integrate with an existing identity system such as central directory service.
+  - {ref}`identity-external-ldap-server-with-sssd`
+
+:::
 
 (identity-authentik-with-sssd)=
 ## Authentik with SSSD
 
 This section shows you how to use Authentik, an open source platform for unified user management,
 as your Charmed HPC cluster's identity provider, and SSSD as the client for integrating your cluster's login
-and compute nodes to Authentik's LDAP outpost.
+and compute nodes with an Authentik LDAP outpost.
 
 :::{admonition} Unfamiliar with Authentik?
 :class: note
@@ -56,14 +64,105 @@ requirements.
 ::::{tab-item} CLI
 :sync: cli
 
-<!-- CLI instructions for deploying Authentik. -->
+First, use `juju add-model`{l=shell} to create the `identity` model in your `charmed-hpc-k8s` Kubernetes cloud.
+
+:::{code-block} shell
+juju add-model identity charmed-hpc-k8s
+:::
+
+Now use `juju deploy`{l=shell} to deploy Authentik with:
+
+* Postgres as Authentik's backing database.
+* Traefik as Authentik's ingress provider.
+* self-signed-certificates as Authentik's X.509 certificates provider.
+
+:::{code-block} shell
+juju deploy authentik-server --channel latest/stable --trust
+juju deploy authentik-worker --channel latest/stable --trust
+juju deploy authentik-ldap-outpost --channel latest/stable --trust
+juju deploy postgresql-k8s --channel 14/stable --trust
+juju deploy traefik-k8s --channel latest/stable --base ubuntu@26.04 --trust
+juju deploy self-signed-certificates --channel latest/stable
+:::
+
+Next, use `juju integrate`{l=shell} to connect Authentik's services together, and integrate
+Authentik with Postgres, Traefik, and self-signed-certificates:
+
+:::{code-block} shell
+juju integrate traefik-k8s:certificates self-signed-certificates:certificates
+juju integrate authentik-server postgresql-k8s
+juju integrate authentik-server traefik-k8s
+juju integrate authentik-ldap-outpost traefik-k8s
+juju integrate authentik-server authentik-worker
+juju integrate authentik-server authentik-ldap-outpost
+:::
 
 ::::
 
 ::::{tab-item} Terraform
 :sync: terraform
 
-<!-- Terraform instructions for deploying Authentik. -->
+First, create the Terraform configuration file _{{ authentik_tf_file }}_ using 
+`mkdir`{l=shell} and `touch`{l=shell}:
+
+:::{code-block} shell
+mkdir authentik
+touch authentik/main.tf
+:::
+
+Now open _{{ authentik_tf_file }}_ in a text editor and add the Juju Terraform provider to
+your configuration:
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/authentik/authentik.tf
+:caption: {{ authentik_tf_file }}
+:language: terraform
+:lines: 1-8
+:::
+
+Next, create the `identity` model on your `charmed-hpc-k8s` Kubernetes cloud:
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/authentik/authentik.tf
+:caption: {{ authentik_tf_file }}
+:language: terraform
+:lines: 10-16
+:::
+
+Now deploy Authentik with:
+
+* Postgres as Authentik's backing database.
+* Traefik as Authentik's ingress provider.
+* self-signed-certificates as Authentik's X.509 certificates provider.
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/authentik/authentik.tf
+:caption: {{ authentik_tf_file }}
+:language: terraform
+:lines: 18-53
+:::
+
+Next, connect Authentik's services together, and integrate Authentik with 
+Postgres, Traefik, and self-signed-certificates:
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/authentik/authentik.tf
+:caption: {{ authentik_tf_file }}
+:language: terraform
+:lines: 55-125
+:::
+
+You can expand the dropdown below to see the full Terraform configuration file before applying it. 
+Now use the `terraform`{l=shell} command to apply your configuration:
+
+:::{code-block} shell
+terraform -chdir=authentik init
+terraform -chdir=authentik apply -auto-approve
+:::
+
+:::{dropdown} Full _{{ authentik_tf_file }}_ Terraform configuration file
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/authentik/authentik.tf
+:caption: {{ authentik_tf_file }}
+:language: terraform
+:linenos:
+:::
+:::
 
 ::::
 
@@ -77,7 +176,24 @@ of `juju status`{l=shell} will be similar to the following:
 
 juju status
 
-"Authentik deployment"
+Model     Controller       Cloud/Region     Version  SLA          Timestamp
+identity  charmed-hpc-k8s  charmed-hpc-k8s  3.6.28   unsupported  17:12:15-04:00
+
+App                       Version   Status  Scale  Charm                     Channel        Rev  Address         Exposed  Message
+authentik-ldap-outpost    2026.5.3  active      1  authentik-ldap-outpost    latest/stable   23  10.152.183.225  no
+authentik-server          2026.5.3  active      1  authentik-server          latest/stable   30  10.152.183.164  no
+authentik-worker          2026.5.3  active      1  authentik-worker          latest/stable    7  10.152.183.134  no
+postgresql-k8s            14.24     active      1  postgresql-k8s            14/stable      960  10.152.183.88   no
+self-signed-certificates            active      1  self-signed-certificates  1/stable       586  10.152.183.68   no
+traefik-k8s               2.11.49   active      1  traefik-k8s               latest/stable  378  10.152.183.124  no       Serving at https://10.148.202.14
+
+Unit                         Workload  Agent  Address     Ports  Message
+authentik-ldap-outpost/0*    active    idle   10.1.0.222
+authentik-server/0*          active    idle   10.1.0.210
+authentik-worker/0*          active    idle   10.1.0.51
+postgresql-k8s/0*            active    idle   10.1.0.223         Primary
+self-signed-certificates/0*  active    idle   10.1.0.120
+traefik-k8s/0*               active    idle   10.1.0.49          Serving at https://10.148.202.14
 :::
 
 You now need to deploy SSSD in your slurm model to enroll your cluster’s machines with the Authentik LDAP outpost.
@@ -87,8 +203,8 @@ You now need to deploy SSSD in your slurm model to enroll your cluster’s machi
 :::{include} /reuse/howto/setup/deploy-identity-provider/common/deploy-sssd.txt
 :::
 
-You now need to integrate SSSD with the Authentik application in your `identity` model so that
-the SSSD application can activate and enroll your machines with the Authentik LDAP outpost.
+You now need to integrate SSSD with the Authentik LDAP outpost in your `identity` model so that
+the SSSD application can activate and enroll your machines with Authentik.
 
 #### Integrate SSSD with Authentik
 
@@ -97,18 +213,157 @@ the SSSD application can activate and enroll your machines with the Authentik LD
 ::::{tab-item} CLI
 :sync: cli
 
-<!-- CLI instructions for integrating Authentik with SSSD -->
+First, create offers from Authentik and self-signed-certificates in your `identity` model using 
+`juju offer`{l=shell}:
+
+:::{code-block} shell
+juju offer identity.authentik-ldap-outpost:ldaps ldaps
+juju offer identity.self-signed-certificates:send-ca-cert send-ca-certs
+:::
+
+Next, use `juju consume`{l=shell} to consume offers from your `identity` model in your `slurm` model:
+
+:::{code-block} shell
+juju consume identity.ldaps
+juju consume identity.send-ca-certs
+:::
+
+After that, use `juju integrate`{l=shell} to integrate SSSD with Authentik:
+
+:::{code-block} shell
+juju integrate sssd send-ca-cert
+juju integrate sssd ldaps
+:::
 
 ::::
 
 ::::{tab-item} Terraform
 :sync: terraform
 
-<!-- Terraform instructions for integrating Authentik with SSSD -->
+First, create the Terraform configuration file _{{ integrate_sssd_with_authentik_tf_file }}_ 
+using `mkdir`{l=shell} and `touch`{l=shell}:
+
+:::{code-block} shell
+mkdir integrate-sssd-with-authentik
+touch integrate-sssd-with-authentik/main.tf
+:::
+
+Now open _{{ integrate_sssd_with_authentik_tf_file }}_ in a text editor and add the Juju Terraform provider to your configuration:
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/authentik/integrate-sssd-with-authentik.tf
+:caption: {{ integrate_sssd_with_authentik_tf_file }}
+:language: terraform
+:lines: 1-8
+:::
+
+Next, declare data sources for the `identity` and `slurm` models, and the Authentik LDAP outpost,
+self-signed-certificates, and SSSD applications:
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/authentik/integrate-sssd-with-authentik.tf
+:caption: {{ integrate_sssd_with_authentik_tf_file }}
+:language: terraform
+:lines: 10-33
+:::
+
+Now create offers from Authentik and self-signed-certificates in your `identity` model:
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/authentik/integrate-sssd-with-authentik.tf
+:caption: {{ integrate_sssd_with_authentik_tf_file }}
+:language: terraform
+:lines: 35-47
+:::
+
+After that, integrate SSSD with the Authentik and self-signed-certificates offer endpoints:
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/authentik/integrate-sssd-with-authentik.tf
+:caption: {{ integrate_sssd_with_authentik_tf_file }}
+:language: terraform
+:lines: 49-67
+:::
+
+You can expand the dropdown below to see the full Terraform configuration 
+file before applying it. Now use the `terraform`{l=shell} command to apply your configuration:
+
+:::{code-block} shell
+terraform -chdir=integrate-sssd-with-authentik init
+terraform -chdir=integrate-sssd-with-authentik apply -auto-approve
+:::
+
+:::{dropdown} Full _{{ integrate_sssd_with_authentik_tf_file }}_ Terraform configuration file
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/authentik/integrate-sssd-with-authentik.tf
+:caption: {{ integrate_sssd_with_authentik_tf_file }}
+:language: terraform
+:linenos:
+:::
+:::
 
 ::::
 
 :::::
+
+The SSSD application will become active within a few minutes. The output of `juju status`{l=shell}
+will be similar to the following:
+
+:::{terminal}
+:scroll:
+
+juju status
+
+Model  Controller              Cloud/Region         Version  SLA          Timestamp
+slurm  charmed-hpc-controller  localhost/localhost  3.6.28   unsupported  05:02:54-06:00
+
+SAAS             Status  Store                   URL
+ldaps            active  charmed-hpc-controller  admin/identity.ldaps
+send-ca-certs    active  charmed-hpc-controller  admin/identity.send-ca-certs
+
+App         Version          Status  Scale  Charm       Channel      Rev  Exposed  Message
+mysql       8.0.44-0ubun...  active      1  mysql       8.0/stable   444  no
+sackd       25.11.2          active      1  sackd       latest/edge   89  no
+slurmctld   25.11.2          active      1  slurmctld   latest/edge  167  no       primary - UP
+slurmd      25.11.2          active      1  slurmd      latest/edge  184  no
+slurmdbd    25.11.2          active      1  slurmdbd    latest/edge  161  no
+slurmrestd  25.11.2          active      1  slurmrestd  latest/edge  161  no
+sssd        2.12.0           active      3  sssd        latest/edge   34  no
+
+Unit           Workload  Agent  Machine  Public address  Ports           Message
+mysql/0*       active    idle   5        10.124.231.61   3306,33060/tcp  Primary
+sackd/0*       active    idle   0        10.124.231.201  6818/tcp
+  sssd/1       active    idle            10.124.231.201
+slurmctld/0*   active    idle   1        10.124.231.3    6817,9092/tcp   primary - UP
+  sssd/0*      active    idle            10.124.231.3
+slurmd/0*      active    idle   2        10.124.231.114  6818/tcp
+  sssd/2       active    idle            10.124.231.114
+slurmdbd/0*    active    idle   3        10.124.231.68   6819/tcp
+slurmrestd/0*  active    idle   4        10.124.231.170  6820/tcp
+
+Machine  State    Address         Inst id        Base          AZ  Message
+0        started  10.124.231.201  juju-6004d5-0  ubuntu@26.04      Running
+1        started  10.124.231.3    juju-6004d5-1  ubuntu@26.04      Running
+2        started  10.124.231.114  juju-6004d5-2  ubuntu@26.04      Running
+3        started  10.124.231.68   juju-6004d5-3  ubuntu@26.04      Running
+4        started  10.124.231.170  juju-6004d5-4  ubuntu@26.04      Running
+5        started  10.124.231.61   juju-6004d5-5  ubuntu@22.04      Running
+
+:::
+
+:::{admonition} LDAPS by default
+:class: note
+
+SSSD must be integrated with self-signed-certificates over the `send-ca-cert` endpoint
+because Charmed Authentik uses LDAPS (TLS-encrypted LDAP) instead of LDAP by default.
+
+SSSD will automatically default to use the LDAPS endpoint by default because the 
+Authentik LDAP outpost advertises LDAPS as the preferred protocol type in the integration
+data that it provides to SSSD.
+
+To publicly expose an unencrypted LDAP endpoint from your Charmed Authentik deployment
+for LDAP clients that do not support LDAPS, configure the Authentik LDAP outpost to
+enable ingress for its LDAP endpoint:
+
+:::{code-block} shell
+juju config authentik-ldap-outpost expose_ldap_ingress=true
+:::
+:::
 
 ### Next Steps
 
@@ -124,7 +379,7 @@ completed the {ref}`howto-deploy-deploy-shared-filesystem` how-to.
 
 This section shows you how to use an external LDAP server as your Charmed HPC cluster's
 identity provider, and SSSD as the client for integrating your cluster's login and compute
-nodes to the external LDAP server.
+nodes with the external LDAP server.
 
 The [ldap-integrator](https://charmhub.io/ldap-integrator) charm is used to proxy your
 external LDAP server's configuration information to other charmed applications.
@@ -237,7 +492,7 @@ the external LDAP server's bind password is `"test"`:
 :class: note
 
 You can use Terraform's [built-in `file` function](https://developer.hashicorp.com/terraform/language/functions/file)
-to read in your bind password from a secure file rather provide
+to read in your bind password from a secure file rather than provide
 it as plain text in the _{{ ldap_integrator_tf_file }}_ plan.
 :::
 
