@@ -346,7 +346,7 @@ Machine  State    Address         Inst id        Base          AZ  Message
 
 :::
 
-:::{admonition} LDAPS by default
+::::{admonition} LDAPS by default
 :class: note
 
 SSSD must be integrated with self-signed-certificates over the `send-ca-cert` endpoint
@@ -363,9 +363,8 @@ enable ingress for its LDAP endpoint:
 :::{code-block} shell
 juju config authentik-ldap-outpost expose_ldap_ingress=true
 :::
-:::
 
-### Next Steps
+::::
 
 You can now use Authentik as the identity provider for your Charmed HPC cluster.
 
