@@ -26,8 +26,21 @@ identity provider for your Charmed HPC cluster.
 
 :::
 
-(identity-authentik-with-sssd)=
-## Authentik with SSSD
+## Prerequisites
+
+- An active [Slurm deployment](#howto-deploy-deploy-slurm) in your [`charmed-hpc` machine cloud](#howto-initialize-machine-cloud).
+- The [Juju CLI client](https://canonical.com/juju/docs/juju-cli/3.6/reference/juju-cli/) installed on your machine.
+- _Optional_: If you're using Terraform, then the [Juju Terraform provider](https://canonical.com/juju/docs/terraform-provider-juju/2.3/).
+
+If you are going to deploy Authentik as the identity provider for your Charmed HPC cluster, 
+additional prerequisites include:
+
+- An initialized [`charmed-hpc-k8s` Kubernetes cloud](#howto-initialize-kubernetes-cloud).
+
+## Deploy identity provider
+
+(identity-authentik-and-sssd)=
+### Deploy Authentik and SSSD
 
 This section shows you how to use Authentik, an open source platform for unified user management,
 as your Charmed HPC cluster's identity provider, and SSSD as the client for integrating your cluster's login
@@ -39,23 +52,6 @@ and compute nodes with an Authentik LDAP outpost.
 If you're unfamiliar with operating Authentik, see the [Charmed Authentik tutorial](https://canonical-identity.readthedocs-hosted.com/authentik/tutorial/getting-started/)
 guide for a high-level introduction to Authentik.
 :::
-
-### Prerequisites
-
-- An active [Slurm deployment](#howto-deploy-deploy-slurm) in your [`charmed-hpc` machine cloud](#howto-initialize-machine-cloud).
-- An initialized [`charmed-hpc-k8s` Kubernetes cloud](#howto-initialize-kubernetes-cloud).
-- The [Juju CLI client](https://canonical.com/juju/docs/juju-cli/3.6/reference/juju-cli/) installed on your machine.
-
-### Deploy Authentik and SSSD
-
-You have two options for deploying Authentik and SSSD:
-
-1. Using the [Juju CLI client](https://canonical.com/juju/docs/juju-cli/3.6/reference/juju-cli/).
-2. Using the [Juju Terraform client](https://canonical.com/juju/docs/terraform-provider-juju/2.3/).
-
-If you want to use Terraform to deploy Authentik and SSSD, see the
-[Manage `terraform-provider-juju`](https://canonical.com/juju/docs/terraform-provider-juju/2.3/howto/manage-the-terraform-provider-for-juju/) how-to guide for additional
-requirements.
 
 #### Deploy Authentik
 
@@ -382,22 +378,6 @@ nodes with the external LDAP server.
 
 The [ldap-integrator](https://charmhub.io/ldap-integrator) charm is used to proxy your
 external LDAP server's configuration information to other charmed applications.
-
-### Prerequisites
-
-- An active [Slurm deployment](#howto-deploy-deploy-slurm) in your [`charmed-hpc` machine cloud](#howto-initialize-machine-cloud).
-- The [Juju CLI client](https://canonical.com/juju/docs/juju-cli/3.6/reference/juju-cli/) installed on your machine.
-
-### Deploy ldap-integrator and SSSD
-
-You have two options for deploying ldap-integrator and SSSD:
-
-1. Using the [Juju CLI client](https://canonical.com/juju/docs/juju-cli/3.6/reference/juju-cli/).
-2. Using the [Juju Terraform client](https://canonical.com/juju/docs/terraform-provider-juju/2.3/).
-
-If you want to use Terraform to deploy ldap-integrator and SSSD, see the
-[Manage `terraform-provider-juju`](https://canonical.com/juju/docs/terraform-provider-juju/2.3/howto/manage-the-terraform-provider-for-juju/) how-to guide for additional
-requirements.
 
 #### Deploy ldap-integrator
 
