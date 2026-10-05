@@ -649,7 +649,7 @@ terraform -chdir=integrate-sssd-with-ldap-integrator apply -auto-approve
 :::{include} /reuse/howto/setup/deploy-identity-provider/common/sssd-with-ldap-status.txt
 :::
 
-#### Optional: Enable TLS encryption between SSSD and the external LDAP server
+#### _Optional_: Enable TLS encryption between SSSD and the external LDAP server
 
 The [manual-tls-certificates](https://charmhub.io/manual-tls-certificates) charm can
 provide your SSSD application with your external LDAP server's TLS certificate.
