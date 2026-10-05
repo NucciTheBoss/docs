@@ -352,7 +352,7 @@ Machine  State    Address         Inst id        Base          AZ  Message
 SSSD must be integrated with self-signed-certificates over the `send-ca-cert` endpoint
 because Charmed Authentik uses LDAPS (TLS-encrypted LDAP) instead of LDAP by default.
 
-SSSD will automatically default to use the LDAPS endpoint by default because the 
+SSSD will automatically default to use the LDAPS endpoint because the 
 Authentik LDAP outpost advertises LDAPS as the preferred protocol type in the integration
 data that it provides to SSSD.
 
