@@ -15,7 +15,7 @@ identity provider for your Charmed HPC cluster.
 
 :::{list-table}
 :header-rows: 1
-:widths: 50 50 
+:widths: 50 50
 
 * - Use case & requirements
   - Recommended provider
