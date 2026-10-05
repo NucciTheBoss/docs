@@ -818,9 +818,155 @@ SSSD will reactivate within a few minutes. You will see that the offer
 :start-line: 3
 :::
 
-### Next Steps
+## Enable SSH key-based authentication
 
-You can now use your external LDAP server as the identity provider for your Charmed HPC cluster.
+Your deployed SSSD application can be integrated with a deployed 
+[OpenSSH](https://charmhub.io/openssh) application to enable SSH key-based authentication 
+for your cluster's users.
 
-You can also start exploring the [Integrate](howto-integrate) section if you have
-completed the {ref}`howto-deploy-deploy-shared-filesystem` how-to.
+:::::{tab-set}
+
+::::{tab-item} CLI
+:sync: cli
+
+First, use `juju deploy`{l=shell} to deploy OpenSSH in your `slurm` model:
+
+:::{code-block} shell
+juju deploy openssh --channel 10/stable --base ubuntu@26.04
+:::
+
+Next, use `juju integrate`{l=shell} to integrate OpenSSH with SSSD and sackd:
+
+:::{code-block} shell
+juju integrate openssh sackd
+juju integrate openssh:ssh-config sssd:ssh-config
+:::
+
+::::
+
+::::{tab-item} Terraform
+:sync: terraform
+
+First, create the Terraform configuration file _{{ openssh_tf_file }}_ using `mkdir`{l=shell}
+and `touch`{l=shell}:
+
+:::{code-block} shell
+mkdir openssh
+touch openssh/main.tf
+:::
+
+Now open _{{ openssh_tf_file }}_ in a text editor and add the Juju Terraform provider to
+your configuration:
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/openssh/openssh.tf
+:caption: {{ openssh_tf_file }}
+:language: terraform
+:lines: 1-7
+:::
+
+Next, declare data sources for the `slurm` model, and the sackd and SSSD applications:
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/openssh/openssh.tf
+:caption: {{ openssh_tf_file }}
+:language: terraform
+:lines: 10-24
+:::
+
+Now deploy OpenSSH:
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/openssh/openssh.tf
+:caption: {{ openssh_tf_file }}
+:language: terraform
+:lines: 26-32
+:::
+
+After that, integrate OpenSSH with sackd and SSSD:
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/openssh/openssh.tf
+:caption: {{ openssh_tf_file }}
+:language: terraform
+:lines: 34-59
+:::
+
+You can expand the dropdown below to see the full Terraform configuration file before
+applying it. Now use the `terraform`{l=shell} command to apply your configuration:
+
+:::{code-block} shell
+terraform -chdir=openssh init
+terraform -chdir=openssh apply -auto-approve
+:::
+
+:::{dropdown} Full _{{ openssh_tf_file }}_ Terraform configuration file
+
+:::{literalinclude} /reuse/howto/setup/deploy-identity-provider/openssh/openssh.tf
+:caption: {{ openssh_tf_file }}
+:language: terraform
+:linenos:
+:::
+:::
+
+::::
+
+:::::
+
+The OpenSSH application will become active within a few minutes. The output of 
+`juju status`{l=shell} will be similar to the following:
+
+:::{terminal}
+:scroll:
+
+juju status
+
+Model  Controller              Cloud/Region         Version  SLA          Timestamp
+slurm  charmed-hpc-controller  localhost/localhost  3.6.28   unsupported  05:02:54-06:00
+
+SAAS             Status  Store                   URL
+ldaps            active  charmed-hpc-controller  admin/identity.ldaps
+send-ca-certs    active  charmed-hpc-controller  admin/identity.send-ca-certs
+
+App         Version          Status  Scale  Charm       Channel      Rev  Exposed  Message
+openssh     10.2p1           active      1  openssh     10/stable      1  no
+mysql       8.0.44-0ubun...  active      1  mysql       8.0/stable   444  no
+sackd       25.11.2          active      1  sackd       latest/edge   89  no
+slurmctld   25.11.2          active      1  slurmctld   latest/edge  167  no       primary - UP
+slurmd      25.11.2          active      1  slurmd      latest/edge  184  no
+slurmdbd    25.11.2          active      1  slurmdbd    latest/edge  161  no
+slurmrestd  25.11.2          active      1  slurmrestd  latest/edge  161  no
+sssd        2.12.0           active      3  sssd        latest/edge   34  no
+
+Unit           Workload  Agent  Machine  Public address  Ports           Message
+mysql/0*       active    idle   5        10.124.231.61   3306,33060/tcp  Primary
+sackd/0*       active    idle   0        10.124.231.201  6818/tcp
+  sssd/1       active    idle            10.124.231.201
+  openssh/0*   active    idle            10.124.231.201  22/tcp
+slurmctld/0*   active    idle   1        10.124.231.3    6817,9092/tcp   primary - UP
+  sssd/0*      active    idle            10.124.231.3
+slurmd/0*      active    idle   2        10.124.231.114  6818/tcp
+  sssd/2       active    idle            10.124.231.114
+slurmdbd/0*    active    idle   3        10.124.231.68   6819/tcp
+slurmrestd/0*  active    idle   4        10.124.231.170  6820/tcp
+
+Machine  State    Address         Inst id        Base          AZ  Message
+0        started  10.124.231.201  juju-6004d5-0  ubuntu@26.04      Running
+1        started  10.124.231.3    juju-6004d5-1  ubuntu@26.04      Running
+2        started  10.124.231.114  juju-6004d5-2  ubuntu@26.04      Running
+3        started  10.124.231.68   juju-6004d5-3  ubuntu@26.04      Running
+4        started  10.124.231.170  juju-6004d5-4  ubuntu@26.04      Running
+5        started  10.124.231.61   juju-6004d5-5  ubuntu@22.04      Running
+
+:::
+
+Your cluster's users can now use their public and private SSH keypairs to authenticate
+when they log into your cluster's login node machines.
+
+## Next Steps
+
+Now that your Charmed HPC cluster's identity provider is deployed, you can start exploring
+the [Integrate](howto-integrate) section if you have also completed the 
+{ref}`howto-deploy-deploy-shared-filesystem` how-to.
+
+If you deployed Authentik as your identity provider, consult {ref}`howto-manage-manage-users-and-groups` 
+for further information on how to manage the users and groups of your Charmed HPC cluster.
+
+For more information on the charms deployed in this how-to guide and how they are managed,
+consult the {ref}`reference-underlying-projects-and-dependencies` reference page.
