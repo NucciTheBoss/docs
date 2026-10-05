@@ -586,14 +586,14 @@ with `juju offer`{l=shell}:
 juju offer identity.ldap-integrator:ldap ldap
 :::
 
-Next, use `juju consume` to consume the offer from your ldap-integrator
+Next, use `juju consume`{l=shell} to consume the offer from your ldap-integrator
 application in your `slurm` model:
 
 :::{code-block} shell
 juju consume identity.ldap
 :::
 
-After that, use `juju integrate` to integrate SSSD with ldap-integrator:
+After that, use `juju integrate`{l=shell} to integrate SSSD with ldap-integrator:
 
 :::{code-block} shell
 juju integrate ldap sssd
