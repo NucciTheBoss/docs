@@ -196,7 +196,7 @@ self-signed-certificates/0*  active    idle   10.1.0.120
 traefik-k8s/0*               active    idle   10.1.0.49          Serving at https://10.148.202.14
 :::
 
-You now need to deploy SSSD in your slurm model to enroll your cluster’s machines with the Authentik LDAP outpost.
+You now need to deploy SSSD in your `slurm` model to enroll your cluster’s machines with the Authentik LDAP outpost.
 
 #### Deploy SSSD
 
