@@ -961,7 +961,7 @@ when they log into your cluster's login node machines.
 
 If you deployed Authentik as your cluster's identity provider, refer to the
 {ref}`howto-manage-manage-users-and-groups-set-public-ssh-keys` section in the
-{ref}`howto-manage-manage-users-and-groups` how-to for futher information on how to
+{ref}`howto-manage-manage-users-and-groups` how-to for further information on how to
 set a user's public SSH keys in Authentik.
 
 ## Next Steps
