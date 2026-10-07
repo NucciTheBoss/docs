@@ -20,7 +20,7 @@ identity provider for your Charmed HPC cluster.
 * - Use case & requirements
   - Recommended provider
 * - __Enterprise Identity__ : Your Charmed HPC cluster requires unified Single Sign-On (SSO), LDAP and SAML protocol bridging, Active Directory synchronization, and built-in administration console or first-party Terraform provider.
-  - {ref}`Authentik <identity-authentik-and-sssd>`
+  - {ref}`Authentik <howto-deploy-deploy-identity-provider-authentik-and-sssd>`
 * - __Existing Infrastructure__ : Your Charmed HPC cluster must integrate with an existing identity system such as central directory service.
   - {ref}`ldap-integrator <identity-ldap-integrator-and-sssd>`
 
@@ -39,7 +39,7 @@ additional prerequisites include:
 
 ## Deploy identity provider
 
-(identity-authentik-and-sssd)=
+(howto-deploy-deploy-identity-provider-authentik-and-sssd)=
 ### Deploy Authentik and SSSD
 
 This section shows you how to use Authentik, an open source platform for unified user management,
