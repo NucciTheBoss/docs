@@ -959,13 +959,18 @@ Machine  State    Address         Inst id        Base          AZ  Message
 Your cluster's users can now use their public and private SSH keypairs to authenticate
 when they log into your cluster's login node machines.
 
+If you deployed Authentik as your cluster's identity provider, refer to the
+{ref}`howto-manage-manage-users-and-groups-set-public-ssh-keys` section in the
+{ref}`howto-manage-manage-users-and-groups` how-to for futher information on how to
+set a user's public SSH keys in Authentik.
+
 ## Next Steps
 
 Now that your Charmed HPC cluster's identity provider is deployed, you can start exploring
 the [Integrate](howto-integrate) section if you have also completed the 
 {ref}`howto-deploy-deploy-shared-filesystem` how-to.
 
-If you deployed Authentik as your identity provider, consult {ref}`howto-manage-manage-users-and-groups` 
+If you deployed Authentik as your cluster's identity provider, consult {ref}`howto-manage-manage-users-and-groups` 
 for further information on how to manage the users and groups of your Charmed HPC cluster.
 
 For more information on the charms deployed in this how-to guide and how they are managed,
