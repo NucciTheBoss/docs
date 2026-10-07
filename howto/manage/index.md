@@ -11,11 +11,13 @@ Adjust the configuration and state of individual compute nodes, and change parti
 - {ref}`howto-manage-node-state`
 - {ref}`howto-manage-scale-partitions`
 
-## Manage identity and security
+## Manage users and groups
 
 Control user and group permissions, and manage how users are able to access the cluster.
 
 - {ref}`howto-manage-manage-users-and-groups`
+
+## Maintain security
 
 Replace the keys that secure internal cluster communication and REST API access.
 
