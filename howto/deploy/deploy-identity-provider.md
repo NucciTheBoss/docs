@@ -956,7 +956,7 @@ Machine  State    Address         Inst id        Base          AZ  Message
 
 :::
 
-Your cluster's users can now use their public and private SSH keypairs to authenticate
+Your cluster's users can now use their public and private SSH key pairs to authenticate
 when they log into your cluster's login node machines.
 
 If you deployed Authentik as your cluster's identity provider, refer to the
