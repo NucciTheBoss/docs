@@ -4,7 +4,6 @@ Administer a Charmed HPC cluster after initial deployment, from routine compute 
 
 - {ref}`howto-manage-compute-nodes`
 - {ref}`howto-manage-users-and-groups`
-- {ref}`howto-manage-user-authentication`
 - {ref}`howto-manage-rotate-slurm-keys`
 - {ref}`howto-manage-single-slurmctld-to-high-availability`
 
@@ -15,7 +14,6 @@ Administer a Charmed HPC cluster after initial deployment, from routine compute 
 
 Manage compute nodes and partitions <manage-compute-nodes>
 Manage users and groups <manage-users-and-groups>
-Manage user authentication <manage-user-authentication>
 Rotate authentication keys <rotate-authentication-keys>
 Migrate Slurm controller to high availability <migrate-slurmctld-to-high-availability>
 :::
