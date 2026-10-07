@@ -4,7 +4,7 @@ myst:
     description: Security hardening guidelines for Charmed HPC, covering Slurm, cloud providers, Juju orchestration, monitoring, and Ubuntu OS security.
 ---
 
-(reference-hardening)=
+(explanation-hardening)=
 # Security hardening guidelines
 
 Charmed HPC is designed for security out-of-the-box but this guide serves as a companion to help tailor security measures to your environment.
@@ -13,7 +13,7 @@ For an overview of Charmed HPC security features see:
 
 - {ref}`cryptography`
 
-(reference-hardening-slurm)=
+(explanation-hardening-slurm)=
 ## Slurm
 
 Slurm is the underlying workload scheduler for Charmed HPC and particular care should be taken with user-facing components such as the `sackd` login nodes and the REST API.
@@ -29,7 +29,7 @@ For REST API security guidance, see:
 
 - [Slurm REST API - Security](https://slurm.schedmd.com/rest.html#security)
 
-(reference-hardening-cloud)=
+(explanation-hardening-cloud)=
 ## Cloud
 
 Charmed HPC can be deployed on a variety of backing clouds. Security documentation for common clouds can be found at:
@@ -44,7 +44,7 @@ Google Cloud, [Security documentation](https://cloud.google.com/docs/security)
 MAAS, "[About MAAS security](https://canonical.com/maas/docs/about-maas-security), [How to enhance MAAS security](https://canonical.com/maas/docs/how-to-enhance-maas-security)"
 :::
 
-(reference-hardening-juju)=
+(explanation-hardening-juju)=
 ## Juju
 
 Juju is the underlying orchestration engine for managing the Charmed HPC Slurm charms throughout their lifecycle. For general Juju security considerations, see:
@@ -71,7 +71,7 @@ Google Cloud, [The Google GCE cloud and Juju](https://documentation.ubuntu.com/j
 MAAS, [The MAAS cloud and Juju](https://documentation.ubuntu.com/juju/latest/reference/cloud/list-of-supported-clouds/the-maas-cloud-and-juju/)
 :::
 
-(reference-hardening-monitoring)=
+(explanation-hardening-monitoring)=
 ## Monitoring and auditing
 
 Charmed HPC supports integration with the Canonical Observability Stack (COS) to provide system monitoring and logging, see:
@@ -79,7 +79,7 @@ Charmed HPC supports integration with the Canonical Observability Stack (COS) to
 - {ref}`howto-manage-integrate-with-cos`
 - [Best practices for production deployments of COS Lite](https://charmhub.io/topics/canonical-observability-stack/reference/best-practices)
 
-(reference-hardening-os)=
+(explanation-hardening-os)=
 ## Operating system
 
 Charmed HPC runs on the Ubuntu operating system. For documentation on Ubuntu security and compliance, see:

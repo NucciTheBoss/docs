@@ -63,7 +63,7 @@ Charmed HPC is a platform for managing high-performance computing clusters. It a
 :::
 
 :::{slice} Security and cryptography
-{doc}`Security hardening guidelines <reference/hardening>`
+{doc}`Security hardening guidelines <explanation/hardening>`
 {doc}`Cryptography and authentication <explanation/cryptography>`
 {doc}`Key rotation <explanation/key-rotation>`
 {doc}`Rotate authentication keys <howto/manage/rotate-authentication-keys>`
@@ -131,13 +131,20 @@ Charmed HPC is an Ubuntu community project. It's an open source project that war
 
 Thinking about using Charmed HPC for your next project? [Get in touch!](https://matrix.to/#/#hpc:ubuntu.com)
 
-```{filtered-toctree}
+:::{filtered-toctree}
 :hidden:
 :titlesonly:
 
+Home <self>
 Getting started <getting-started>
 howto/index
 explanation/index
 reference/index
+:::
+
+:::{filtered-toctree}
+:hidden:
+:titlesonly:
+
 contributing/index
-```
+:::
