@@ -19,10 +19,9 @@ cluster, you will need to have:
 - {ref}`Authentik deployed and integrated as your Charmed HPC cluster's identity provider. <howto-deploy-deploy-identity-provider-authentik-and-sssd>`
 - [Terraform](https://developer.hashicorp.com/terraform/docs) installed on your machine.
 
-Once you have satisfied the criteria above, you will need to enable the Authentik 
-Terraform provider in your Terraform configuration.
-
 ## Configure the Authentik Terraform provider
+
+You now need to enable the Authentik Terraform provider in your Terraform configuration.
 
 First, declare the Authentik Terraform provider as a required provider in your Terraform
 configuration file:
