@@ -38,7 +38,8 @@ terraform {
 :::
 
 Next, use the Authentik server application's `get-bootstrap-admin-credentials` action to
-retrieve an access token that the provider will use to authenticate with your Authentik deployment:
+retrieve an access token that the Authentik Terraform provider will use to authenticate 
+with your Authentik deployment:
 
 :::{code-block} shell
 juju run authentik-server/leader get-bootstrap-admin-credentials
