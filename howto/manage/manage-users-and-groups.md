@@ -8,7 +8,7 @@ myst:
 (howto-manage-manage-users-and-groups)=
 # Manage users and groups
 
-This guide provides examples of using the Authentik Terraform provider to manage the 
+This guide provides instructions on how you can use the Authentik Terraform provider to manage the 
 users and groups of a Charmed HPC cluster. 
 
 ## Prerequisites
