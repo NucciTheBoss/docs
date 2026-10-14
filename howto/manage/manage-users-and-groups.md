@@ -139,7 +139,7 @@ provider "authentik" {
 ## Add a new user
 
 The `authentik_user` resource can be used to add new users. For example, to add the user
-_Jane Doe_ to your cluster, do:
+_Jane Doe_ to your cluster:
 
 :::{code-block} terraform
 resource "authentik_user" "janedoe" {
@@ -152,7 +152,7 @@ resource "authentik_user" "janedoe" {
 
 A user's default shell can be configured by setting the `loginShell` attribute in the `attributes`
 parameter of the `authentik_user` resource. For example, to set the default shell of user 
-_Jane Doe_ to `/bin/bash`{l=shell}, do:
+_Jane Doe_ to `/bin/bash`{l=shell}:
 
 :::{code-block} terraform
 :emphasize-lines: 5-7
@@ -183,7 +183,7 @@ if the user wants to have a default shell other than `/bin/sh`{l=shell}.
 
 A user's public SSH keys can be configured by setting the `sshPublicKey` attribute in the `attributes`
 parameter of the `authentik_user` resource. For example, to set the public SSH keys for user 
-_Jane Doe_, do:
+_Jane Doe_:
 
 :::{code-block} terraform
 :emphasize-lines: 5-10
@@ -227,7 +227,7 @@ this attribute by default for newly created users.
 ## Add a new group
 
 The `authentik_group` resource can be used to add new groups. For example, to add the group
-_Scientists_ to your cluster, do:
+_Scientists_ to your cluster:
 
 :::{code-block} terraform
 resource "authentik_group" "scientists" {
@@ -238,7 +238,7 @@ resource "authentik_group" "scientists" {
 ### Add a user to a group
 
 Users can be added to a group by setting the `users` parameter. For example, to add the
-existing user _Jane Doe_ to the _Scientists_ group, do:
+existing user _Jane Doe_ to the _Scientists_ group:
 
 :::{code-block} terraform
 data "authentik_user" "janedoe" {
@@ -282,7 +282,7 @@ resource "authentik_group" "scientists" {
 
 Users can be removed from a group by importing the group's information into your Terraform
 configuration and filtering out the user to remove from the group's `users` field. For example,
-to remove the user _Jane Doe_ from the _Scientists_ group, do:
+to remove the user _Jane Doe_ from the _Scientists_ group:
 
 :::{code-block} terraform
 data "authentik_group" "existing" {
