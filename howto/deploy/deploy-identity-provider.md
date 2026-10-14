@@ -53,6 +53,13 @@ If you're unfamiliar with operating Authentik, see the [Charmed Authentik tutori
 guide for a high-level introduction to Authentik.
 :::
 
+#### Prerequisites
+
+- An initialized [`charmed-hpc-k8s` Kubernetes cloud](#howto-initialize-kubernetes-cloud).
+- An active [Slurm deployment](#howto-deploy-deploy-slurm) in your [`charmed-hpc` machine cloud](#howto-initialize-machine-cloud).
+- The [Juju CLI client](https://canonical.com/juju/docs/juju-cli/3.6/reference/juju-cli/) installed on your machine.
+- _Optional_: If you're using Terraform, then the [Juju Terraform provider](https://canonical.com/juju/docs/terraform-provider-juju/2.3/).
+
 #### Deploy Authentik
 
 :::::{tab-set}
@@ -371,6 +378,12 @@ nodes with the external LDAP server.
 
 The [ldap-integrator](https://charmhub.io/ldap-integrator) charm is used to proxy your
 external LDAP server's configuration information to other charmed applications.
+
+#### Prerequisites
+
+- An active [Slurm deployment](#howto-deploy-deploy-slurm) in your [`charmed-hpc` machine cloud](#howto-initialize-machine-cloud).
+- The [Juju CLI client](https://canonical.com/juju/docs/juju-cli/3.6/reference/juju-cli/) installed on your machine.
+- _Optional_: If you're using Terraform, then the [Juju Terraform provider](https://canonical.com/juju/docs/terraform-provider-juju/2.3/).
 
 #### Deploy ldap-integrator
 
