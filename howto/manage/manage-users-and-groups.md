@@ -89,7 +89,7 @@ external-endpoints: '{"traefik-k8s": {"url": "https://10.148.202.14"}}'
 <br>
 
 The output above shows that the public endpoint of your Traefik application is
-`https://10.148.202.14` which means that this is also the public HTTPS address of 
+`https://10.148.202.14` which will also be the public HTTPS address of 
 your Authentik deployment.
 ::::
 
