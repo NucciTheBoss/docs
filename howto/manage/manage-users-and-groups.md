@@ -97,8 +97,7 @@ You can now use the Authentik Terraform provider to manage the users and groups 
 your Charmed HPC cluster. Refer to the sections below for examples of common management
 tasks such as adding new users and groups to the cluster.
 
-::::{admonition} Accessing Authentik's API over HTTPS
-:class: warning
+::::{dropdown} Warning: Accessing Authentik's API over HTTPS
 
 The Authentik API uses HTTPS by default. This means that if you are using a private or
 self-signed CA certificate, you will need to install the CA certificate on the machine
