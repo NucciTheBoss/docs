@@ -170,12 +170,9 @@ resource "authentik_user" "janedoe" {
 :::{admonition} `/bin/sh`{l=shell} is the default shell
 :class: note
 
-`/bin/sh`{l=shell} is set as the default shell for a user if
-the `loginShell` attribute is not returned in SSSD's LDAP search query for the user's information when the user logs into a machine.
-
-Authentik does not set a default shell for newly created users, so you must
-set `loginShell` in the user's custom attributes in Authentik 
-if the user wants to have a default shell other than `/bin/sh`{l=shell}.
+Authentik does not set a default shell for newly created users, so if you omit `loginShell`
+as a custom attribute, a user's default shell will be `/bin/sh`{l=shell} when they log
+into your cluster's login and compute nodes.
 :::
 
 (howto-manage-manage-users-and-groups-set-public-ssh-keys)=
