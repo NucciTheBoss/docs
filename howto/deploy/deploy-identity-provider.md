@@ -26,17 +26,6 @@ identity provider for your Charmed HPC cluster.
 
 :::
 
-## Prerequisites
-
-- An active [Slurm deployment](#howto-deploy-deploy-slurm) in your [`charmed-hpc` machine cloud](#howto-initialize-machine-cloud).
-- The [Juju CLI client](https://canonical.com/juju/docs/juju-cli/3.6/reference/juju-cli/) installed on your machine.
-- _Optional_: If you're using Terraform, then the [Juju Terraform provider](https://canonical.com/juju/docs/terraform-provider-juju/2.3/).
-
-If you are going to deploy Authentik as the identity provider for your Charmed HPC cluster, 
-additional prerequisites include:
-
-- An initialized [`charmed-hpc-k8s` Kubernetes cloud](#howto-initialize-kubernetes-cloud).
-
 ## Deploy identity provider
 
 (howto-deploy-deploy-identity-provider-authentik-and-sssd)=
@@ -199,17 +188,18 @@ self-signed-certificates/0*  active    idle   10.1.0.120
 traefik-k8s/0*               active    idle   10.1.0.49          Serving at https://10.148.202.14
 :::
 
-You now need to deploy SSSD in your `slurm` model to enroll your cluster’s machines with the Authentik LDAP outpost.
-
 #### Deploy SSSD
+
+You now need to deploy SSSD in your `slurm` model to enroll your cluster’s machines
+with the Authentik LDAP outpost.
 
 :::{include} /reuse/howto/setup/deploy-identity-provider/common/deploy-sssd.txt
 :::
 
+#### Integrate SSSD with Authentik
+
 You now need to integrate SSSD with the Authentik LDAP outpost in your `identity` model so that
 the SSSD application can activate and enroll your machines with Authentik.
-
-#### Integrate SSSD with Authentik
 
 :::::{tab-set}
 
@@ -547,18 +537,18 @@ Machine  State    Address         Inst id        Base          AZ  Message
 0        started  10.124.231.240  juju-be6f35-0  ubuntu@24.04      Running
 :::
 
+#### Deploy SSSD
+
 You now need to deploy SSSD in your `slurm` model to enroll your cluster's
 machines with the external LDAP server.
-
-#### Deploy SSSD
 
 :::{include} /reuse/howto/setup/deploy-identity-provider/common/deploy-sssd.txt
 :::
 
+#### Integrate SSSD with ldap-integrator
+
 You now need to integrate SSSD with the ldap-integrator application in your `identity` model so that
 the SSSD application can activate and enroll your machines with the external LDAP server.
-
-#### Integrate SSSD with ldap-integrator
 
 :::::{tab-set}
 
