@@ -5,7 +5,7 @@ myst:
     description: Manage the users and groups of a Charmed HPC cluster using the Authentik Terraform provider. Discover how to add, remove, and delete users and groups.
 ---
 
-(howto-manage-manage-users-and-groups)=
+(howto-manage-users-and-groups)=
 # Manage users and groups
 
 This guide provides instructions on how you can use the Authentik Terraform provider to manage the 

@@ -3,30 +3,9 @@
 
 Administer a Charmed HPC cluster after initial deployment, from routine compute node operations to cluster-wide changes that require a maintenance window.
 
-## Manage compute nodes and partitions
-
-Adjust the configuration and state of individual compute nodes, and change partition capacity as demand on your cluster changes.
-
-- {ref}`howto-manage-custom-node-config`
-- {ref}`howto-manage-default-node-state`
-- {ref}`howto-manage-node-state`
-- {ref}`howto-manage-scale-partitions`
-
-## Manage users and groups
-
-Control user and group permissions, and manage how users are able to access the cluster.
-
-- {ref}`howto-manage-manage-users-and-groups`
-
-## Maintain security
-
-Replace the keys that secure internal cluster communication and REST API access.
-
-- {ref}`howto-manage-rotate-auth-key`
-- {ref}`howto-manage-rotate-jwt-key`
-
-## Enable high-availability
-
+- {ref}`howto-manage-compute-nodes`
+- {ref}`howto-manage-users-and-groups`
+- {ref}`howto-manage-rotate-slurm-keys`
 - {ref}`howto-manage-single-slurmctld-to-high-availability`
 
 :::{toctree}

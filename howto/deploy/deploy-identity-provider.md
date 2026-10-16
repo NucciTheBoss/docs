@@ -966,7 +966,7 @@ when they log into your cluster's login nodes.
 
 If you deployed Authentik as your cluster's identity provider, refer to the
 {ref}`howto-manage-manage-users-and-groups-set-public-ssh-keys` section in the
-{ref}`howto-manage-manage-users-and-groups` how-to for further information on how to
+{ref}`howto-manage-users-and-groups` how-to for further information on how to
 set a user's public SSH keys in Authentik.
 
 ## Next Steps
@@ -983,7 +983,7 @@ You can also start exploring the {ref}`howto-manage` section for further informa
 how to perform cluster management tasks like 
 {ref}`compute node and partition management <howto-manage-compute-nodes>`.
 
-If you deployed Authentik as your cluster's identity provider, you can visit {ref}`howto-manage-manage-users-and-groups` 
+If you deployed Authentik as your cluster's identity provider, you can visit {ref}`howto-manage-users-and-groups` 
 for further information on how to manage the users and groups of your Charmed HPC cluster.
 
 For more information on the charms deployed in this how-to guide and how they are managed,
