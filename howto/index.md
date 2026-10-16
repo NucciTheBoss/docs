@@ -15,7 +15,7 @@ Detailed steps for key operations and common tasks when working with Charmed HPC
 - {ref}`Deploy a shared filesystem <howto-deploy-deploy-shared-filesystem>`
 - {ref}`Deploy an identity provider <howto-deploy-deploy-identity-provider>`
 
-(howto-integrate)=
+(howto-integrate-section)=
 ## Integration with other tools
 
 Connect your cluster to observability platforms and workload tools.
@@ -25,7 +25,7 @@ Connect your cluster to observability platforms and workload tools.
 - {ref}`howto-integrate-email-notifications`
 - {ref}`howto-manage-integrate-with-apptainer`
 
-(howto-manage)=
+(howto-manage-section)=
 ## Cluster management
 
 - {ref}`Manage compute nodes and partitions <howto-manage-compute-nodes>`

@@ -975,11 +975,11 @@ Now that you have {ref}`deployed Slurm <howto-deploy-deploy-slurm>`,
 {ref}`deployed a shared filesystem <howto-deploy-deploy-shared-filesystem>`, and deployed an 
 identity provider, you have completed the deployment of your Charmed HPC cluster.
 
-You can now start exploring the {ref}`howto-integrate` section for further information
+You can now start exploring the {ref}`howto-integrate-index` section for further information
 on how to integrate additional tooling in your cluster like the 
 {ref}`Canonical Observability Stack <howto-manage-integrate-with-cos>` or a 
 {ref}`mail server for sending users job status notifactions <howto-integrate-email-notifications>`.
-You can also start exploring the {ref}`howto-manage` section for further information on
+You can also start exploring the {ref}`howto-manage-index` section for further information on
 how to perform cluster management tasks like 
 {ref}`compute node and partition management <howto-manage-compute-nodes>`.
 
