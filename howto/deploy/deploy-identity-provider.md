@@ -212,7 +212,7 @@ First, create offers from Authentik and self-signed-certificates in your `identi
 `juju offer`{l=shell}:
 
 :::{code-block} shell
-juju offer identity.authentik-ldap-outpost:ldaps ldaps
+juju offer identity.authentik-ldap-outpost:ldap ldaps
 juju offer identity.self-signed-certificates:send-ca-cert send-ca-certs
 :::
 
