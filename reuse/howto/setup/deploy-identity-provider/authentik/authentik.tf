@@ -49,7 +49,7 @@ module "traefik_k8s" {
 module "self_signed_certificates" {
   source     = "git::https://github.com/canonical/self-signed-certificates-operator//terraform"
   model_uuid = juju_model.identity.uuid
-  channel    = "latest/stable"
+  channel    = "1/stable"
 }
 
 resource "juju_integration" "traefik_to_self_signed_certificates" {

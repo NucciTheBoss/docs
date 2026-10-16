@@ -76,7 +76,7 @@ juju deploy authentik-worker --channel latest/stable --trust
 juju deploy authentik-ldap-outpost --channel latest/stable --trust
 juju deploy postgresql-k8s --channel 14/stable --trust
 juju deploy traefik-k8s --channel latest/stable --base ubuntu@26.04 --trust
-juju deploy self-signed-certificates --channel latest/stable
+juju deploy self-signed-certificates --channel 1/stable
 :::
 
 Next, use `juju integrate`{l=shell} to connect Authentik's services together, and integrate
