@@ -1,3 +1,4 @@
+(howto-manage)=
 # Manage your cluster
 
 Administer a Charmed HPC cluster after initial deployment, from routine compute node operations to cluster-wide changes that require a maintenance window.
