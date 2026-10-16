@@ -136,19 +136,20 @@ Then, use `juju deploy`{l=shell} to deploy `sackd`, `slurmctld`, and `slurmd`:
 :::{code-block} shell
 juju deploy slurmctld \
   --base ubuntu@26.04 \
-  --channel "latest/edge" \
+  --channel latest/edge \
   --constraints="virt-type=virtual-machine"
 
 juju deploy slurmd compute \
   --num-units 2 \
   --base ubuntu@26.04 \
-  --channel "latest/edge" \
+  --channel latest/edge \
   --config default-node-state=idle \
   --constraints="virt-type=virtual-machine"
 
 juju deploy sackd login \
   --base ubuntu@26.04 \
-  --channel "latest/edge" \
+  --channel latest/edge \
+  --config default-node-state=idle \
   --constraints="virt-type=virtual-machine"
 :::
 
@@ -190,7 +191,7 @@ juju add-storage microceph/0 osd-standalone=loop,2G,3
 :::
 
 Then, use `juju integrate`{l=shell} to integrate the filesystem components
-together aqnd with Slurm:
+together and with Slurm:
 
 :::{code-block} shell
 juju integrate scratch ceph-fs
@@ -253,10 +254,10 @@ You will use `juju exec`{l=shell} and `juju scp`{l=shell} to make the new
 example directories, set appropriate permissions, and then finally copy the files over:
 
 :::{code-block} shell
-juju exec -u login/0 -- \
+juju exec --unit login/0 -- \
   sudo mkdir /scratch/mpi_example /scratch/apptainer_example /home/ubuntu/apptainer_cache /home/ubuntu/apptainer_tmp
 
-juju exec -u login/0 -- \
+juju exec --unit login/0 -- \
   sudo chown $USER: /scratch/* /home/ubuntu/apptainer_*
 
 juju scp submit_hello.sh mpi_hello_world.c \
