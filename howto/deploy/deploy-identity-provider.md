@@ -19,26 +19,28 @@ identity provider for your Charmed HPC cluster.
 
 * - Use case & requirements
   - Recommended provider
-* - __Enterprise Identity__ : Your Charmed HPC cluster requires unified Single Sign-On (SSO), LDAP and SAML protocol bridging, Active Directory synchronization, and built-in administration console or first-party Terraform provider.
-  - {ref}`Authentik <howto-deploy-deploy-identity-provider-authentik-and-sssd>`
+* - __New Infrastructure__ : Your Charmed HPC cluster requires a new, standalone identity provider deployment that supports Single Sign-On (SSO), LDAP and OAuth protocol bridging, provides an administration console, or can be controlled through a first-party Terraform provider.
+  - {ref}`Authentik and SSSD <howto-deploy-deploy-identity-provider-authentik-and-sssd>`
 * - __Existing Infrastructure__ : Your Charmed HPC cluster must integrate with an existing identity system such as central directory service.
-  - {ref}`ldap-integrator <identity-ldap-integrator-and-sssd>`
+  - {ref}`ldap-integrator and SSSD <identity-ldap-integrator-and-sssd>`
 
 :::
 
 ## Deploy identity provider
 
+Follow the instructions in the sections below to deploy your chosen identity provider.
+
 (howto-deploy-deploy-identity-provider-authentik-and-sssd)=
 ### Deploy Authentik and SSSD
 
-This section shows you how to use Authentik, an open source platform for unified user management,
-as your Charmed HPC cluster's identity provider, and SSSD as the client for integrating your cluster's login
-and compute nodes with an Authentik LDAP outpost.
+This section provides instructions on how to use Authentik, an open source platform for unified 
+user management, as your Charmed HPC cluster's identity provider, and SSSD as the client for 
+integrating your cluster's login and compute nodes with an Authentik LDAP outpost.
 
 :::{admonition} Unfamiliar with Authentik?
 :class: note
 
-If you're unfamiliar with operating Authentik, see the [Charmed Authentik tutorial](https://canonical-identity.readthedocs-hosted.com/authentik/tutorial/getting-started/)
+If you're unfamiliar with operating Authentik, visit the [Charmed Authentik tutorial](https://canonical-identity.readthedocs-hosted.com/authentik/tutorial/getting-started/)
 guide for a high-level introduction to Authentik.
 :::
 
@@ -362,9 +364,9 @@ juju config authentik-ldap-outpost expose_ldap_ingress=true
 (identity-ldap-integrator-and-sssd)=
 ### Deploy ldap-integrator and SSSD
 
-This section shows you how to use an external LDAP server as your Charmed HPC cluster's
-identity provider, and SSSD as the client for integrating your cluster's login and compute
-nodes with the external LDAP server.
+This section provides instructions on how to use an external LDAP server as your 
+Charmed HPC cluster's identity provider, and SSSD as the client for integrating your cluster's
+login and compute nodes with the external LDAP server.
 
 The [ldap-integrator](https://charmhub.io/ldap-integrator) charm is used to proxy your
 external LDAP server's configuration information to other charmed applications.
@@ -960,7 +962,7 @@ Machine  State    Address         Inst id        Base          AZ  Message
 :::
 
 Your cluster's users can now use their public and private SSH key pairs to authenticate
-when they log into your cluster's login node machines.
+when they log into your cluster's login nodes.
 
 If you deployed Authentik as your cluster's identity provider, refer to the
 {ref}`howto-manage-manage-users-and-groups-set-public-ssh-keys` section in the
@@ -969,12 +971,20 @@ set a user's public SSH keys in Authentik.
 
 ## Next Steps
 
-Now that your Charmed HPC cluster's identity provider is deployed, you can start exploring
-the [Integrate](howto-integrate) section if you have also completed the 
-{ref}`howto-deploy-deploy-shared-filesystem` how-to.
+Now that you have {ref}`deployed Slurm <howto-deploy-deploy-slurm>`, 
+{ref}`deployed a shared filesystem <howto-deploy-deploy-shared-filesystem>`, and deployed an 
+identity provider, you have completed the deployment of your Charmed HPC cluster.
 
-If you deployed Authentik as your cluster's identity provider, consult {ref}`howto-manage-manage-users-and-groups` 
+You can now start exploring the {ref}`howto-integrate` section for further information
+on how to integrate additional tooling in your cluster like the 
+{ref}`Canonical Observability Stack <howto-manage-integrate-with-cos>` or a 
+{ref}`mail server for sending users job status notifactions <howto-integrate-email-notifications>`.
+You can also start exploring the {ref}`howto-manage` section for further information on
+how to perform cluster management tasks like 
+{ref}`compute node and partition management <howto-manage-compute-nodes>`.
+
+If you deployed Authentik as your cluster's identity provider, you can visit {ref}`howto-manage-manage-users-and-groups` 
 for further information on how to manage the users and groups of your Charmed HPC cluster.
 
 For more information on the charms deployed in this how-to guide and how they are managed,
-consult the {ref}`reference-underlying-projects-and-dependencies` reference page.
+visit the {ref}`reference-underlying-projects-and-dependencies` reference page.
