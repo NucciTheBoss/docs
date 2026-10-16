@@ -1,3 +1,4 @@
+(howto-integrate)=
 # Integrate with other tools
 
 Extend a Charmed HPC cluster by connecting it to external services for observability, container runtimes, and notifications.
